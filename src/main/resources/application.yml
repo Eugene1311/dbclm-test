@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:49153/dbclm_test
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgrespw
