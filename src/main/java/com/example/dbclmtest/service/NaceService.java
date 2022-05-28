@@ -1,6 +1,7 @@
 package com.example.dbclmtest.service;
 
-import com.example.dbclmtest.entity.Nace;
+import com.example.dbclmtest.dto.Nace;
+import com.example.dbclmtest.entity.NaceEntity;
 import com.example.dbclmtest.repository.NaceRepository;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -47,7 +48,41 @@ public class NaceService {
                         return Mono.error(e);
                     }
                 })
+                .log()
                 .flatMapMany(Flux::fromIterable)
-                .log();
+                .map(this::mapToEntity)
+                .collectList()
+                .flatMapMany(naceRepository::saveAll)
+                .map(this::mapToDto);
+    }
+
+    private Nace mapToDto(NaceEntity naceEntity) {
+        return new Nace(
+                naceEntity.getOrderValue(),
+                naceEntity.getLevelValue(),
+                naceEntity.getCode(),
+                naceEntity.getParent(),
+                naceEntity.getDescription(),
+                naceEntity.getThisItemIncludes(),
+                naceEntity.getThisItemAlsoIncludes(),
+                naceEntity.getRulings(),
+                naceEntity.getThisItemExcludes(),
+                naceEntity.getReferenceToISIC()
+        );
+    }
+
+    private NaceEntity mapToEntity(Nace nace) {
+        return new NaceEntity(
+                nace.order(),
+                nace.level(),
+                nace.code(),
+                nace.parent(),
+                nace.description(),
+                nace.thisItemIncludes(),
+                nace.thisItemAlsoIncludes(),
+                nace.rulings(),
+                nace.thisItemExcludes(),
+                nace.referenceToISIC()
+        );
     }
 }

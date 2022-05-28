@@ -1,12 +1,13 @@
-package com.example.dbclmtest.entity;
+package com.example.dbclmtest.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
 
 public record Nace(
     @JsonProperty("Order")
-    String order,
+    int order,
     @JsonProperty("Level")
-    String level,
+    int level,
     @JsonProperty("Code")
     String code,
     @JsonProperty("Parent")

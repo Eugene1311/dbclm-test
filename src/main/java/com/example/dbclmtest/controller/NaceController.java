@@ -1,6 +1,7 @@
 package com.example.dbclmtest.controller;
 
-import com.example.dbclmtest.entity.Nace;
+import com.example.dbclmtest.dto.Nace;
+import com.example.dbclmtest.entity.NaceEntity;
 import com.example.dbclmtest.service.NaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.codec.multipart.FilePart;
