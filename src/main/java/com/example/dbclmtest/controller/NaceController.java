@@ -1,15 +1,12 @@
 package com.example.dbclmtest.controller;
 
 import com.example.dbclmtest.dto.Nace;
-import com.example.dbclmtest.entity.NaceEntity;
 import com.example.dbclmtest.service.NaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/naces")
@@ -20,5 +17,15 @@ public class NaceController {
     @PostMapping(value = "/upload")
     public Flux<Nace> saveNaceDetails(@RequestPart("file") FilePart file) {
         return naceService.saveNaceDetails(file);
+    }
+
+    @GetMapping(value = "/{order}")
+    public Mono<Nace> getNaceDetailsByOrder(@PathVariable int order) {
+        return naceService.getNaceDetailsByOrder(order);
+    }
+
+    @GetMapping
+    public Flux<Nace> getNaceDetailsByOrder() {
+        return naceService.getAllNaceDetails();
     }
 }

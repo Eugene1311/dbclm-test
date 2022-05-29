@@ -57,6 +57,16 @@ public class NaceService {
                 .map(this::mapToDto);
     }
 
+    public Mono<Nace> getNaceDetailsByOrder(int order) {
+        return naceRepository.findNaceDetailsById(order)
+                .map(this::mapToDto);
+    }
+
+    public Flux<Nace> getAllNaceDetails() {
+        return naceRepository.findAllNaceDetails()
+                .map(this::mapToDto);
+    }
+
     private Nace mapToDto(NaceEntity naceEntity) {
         return new Nace(
                 naceEntity.getOrder(),

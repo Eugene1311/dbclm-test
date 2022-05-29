@@ -3,3 +3,7 @@ spring:
     url: r2dbc:postgresql://localhost:49153/dbclm_test
     username: postgres
     password: postgrespw
+#logging:
+#  level:
+#    org.springframework.data.r2dbc: debug
+#    io.r2dbc.postgresql: debug
