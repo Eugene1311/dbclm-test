@@ -25,7 +25,7 @@ public class NaceService {
 
     public Flux<Nace> saveNaceDetails(FilePart file) {
         final CsvMapper mapper = new CsvMapper();
-        // todo read directly from InputStream?
+
         return file.content()
                 .map(db -> db.asByteBuffer().array())
                 .map(String::new)
