@@ -14,6 +14,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,16 +51,16 @@ public class NaceService {
                 })
                 .log()
                 .flatMapMany(Flux::fromIterable)
+                .filter(nace -> Objects.nonNull(nace.order()))
                 .map(this::mapToEntity)
-                .collectList()
-                .flatMapMany(naceRepository::saveAll)
+                .flatMap(naceRepository::insert)
                 .map(this::mapToDto);
     }
 
     private Nace mapToDto(NaceEntity naceEntity) {
         return new Nace(
-                naceEntity.getOrderValue(),
-                naceEntity.getLevelValue(),
+                naceEntity.getOrder(),
+                naceEntity.getLevel(),
                 naceEntity.getCode(),
                 naceEntity.getParent(),
                 naceEntity.getDescription(),

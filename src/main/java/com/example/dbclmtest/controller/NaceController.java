@@ -19,7 +19,6 @@ public class NaceController {
 
     @PostMapping(value = "/upload")
     public Flux<Nace> saveNaceDetails(@RequestPart("file") FilePart file) {
-        System.out.println(file);
         return naceService.saveNaceDetails(file);
     }
 }

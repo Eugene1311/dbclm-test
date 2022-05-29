@@ -2,15 +2,17 @@ package com.example.dbclmtest.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @Table("nace")
 public final class NaceEntity {
     @Id
-    private Integer id;
-    private final int orderValue;
-    private final int levelValue;
+    @Column("id")
+    private final int order;
+    @Column("level_value")
+    private final int level;
     private final String code;
     private final String parent;
     private final String description;

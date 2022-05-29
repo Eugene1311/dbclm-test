@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS nace (
-    id SERIAL PRIMARY KEY,
-    order_value INTEGER,
+    id INTEGER PRIMARY KEY,
     level_value INTEGER,
     code VARCHAR(16),
     parent VARCHAR(16),
