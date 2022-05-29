@@ -31,19 +31,11 @@ public class NaceService {
                 .map(String::new)
                 .collect(Collectors.joining())
                 .flatMap(content -> {
-                    try {
-                        MappingIterator<Nace> iterator = mapper
-                                .readerFor(Nace.class)
-                                .with(CsvSchema.emptySchema().withHeader())
-                                .readValues(content);
+                    try(MappingIterator<Nace> iterator = mapper
+                            .readerFor(Nace.class)
+                            .with(CsvSchema.emptySchema().withHeader())
+                            .readValues(content)) {
 
-                        return Mono.just(iterator);
-                    } catch (IOException e) {
-                        return Mono.error(e);
-                    }
-                })
-                .flatMap(iterator -> {
-                    try {
                         return Mono.just(iterator.readAll());
                     } catch (IOException e) {
                         return Mono.error(e);
