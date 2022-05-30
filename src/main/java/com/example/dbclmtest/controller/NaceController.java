@@ -3,8 +3,10 @@ package com.example.dbclmtest.controller;
 import com.example.dbclmtest.dto.Nace;
 import com.example.dbclmtest.service.NaceService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -21,12 +23,13 @@ public class NaceController {
 
     @GetMapping(value = "/{order}")
     public Mono<Nace> getNaceDetailsByOrder(@PathVariable int order) {
-        // todo NOT FOUND
-        return naceService.getNaceDetailsByOrder(order);
+        return naceService.getNaceDetailsByOrder(order)
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Nace not found")));
     }
 
     @GetMapping
     public Flux<Nace> getNaceDetailsByOrder() {
-        return naceService.getAllNaceDetails();
+        return naceService.getAllNaceDetails()
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Naces not found")));
     }
 }

@@ -123,4 +123,15 @@ public class NaceIntegrationTest {
                         responseSpec.expectBody(Nace.class).isEqualTo(expected)
                 );
     }
+
+    @Test
+    @DisplayName("should return NOT FOUND status if Nace is absent")
+    public void testGetNaceByOrderNotFound() {
+        var order = 11;
+
+        webClient.get().uri("/naces/" + order)
+                .exchange()
+                .expectStatus()
+                .isNotFound();
+    }
 }
