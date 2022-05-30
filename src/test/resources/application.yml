@@ -1,0 +1,3 @@
+spring:
+  r2dbc:
+    url: r2dbc:tc:postgresql://localhost:5432/dbclm-test-database?TC_IMAGE_TAG=14.3-alpine
