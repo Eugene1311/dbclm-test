@@ -1,4 +1,4 @@
 logging:
   level:
-    org.springframework.data.r2dbc: debug
-    io.r2dbc.postgresql: debug
+#    org.springframework.data.r2dbc: debug
+    io.r2dbc.postgresql.QUERY: debug

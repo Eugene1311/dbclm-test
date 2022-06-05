@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DbClmTestApplication {
 
     public static void main(String[] args) {
-        // todo autocloseable
         SpringApplication.run(DbClmTestApplication.class, args);
     }
 }

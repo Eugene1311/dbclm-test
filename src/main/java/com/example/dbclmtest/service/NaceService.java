@@ -14,6 +14,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class NaceService {
     private final NaceRepository naceRepository;
 
-    public Flux<Nace> saveNaceDetails(FilePart file) {
+    public Mono<Integer> saveNaceDetails(FilePart file) {
         final CsvMapper mapper = new CsvMapper();
 
         return file.content()
@@ -42,11 +43,12 @@ public class NaceService {
                     }
                 })
                 .log()
-                .flatMapMany(Flux::fromIterable)
-                .filter(nace -> Objects.nonNull(nace.order()))
-                .map(this::mapToEntity)
-                .flatMap(naceRepository::insert)
-                .map(this::mapToDto);
+                .map(naces -> naces.stream()
+                        .filter(nace -> Objects.nonNull(nace.order()))
+                        .map(this::mapToEntity)
+                        .toList())
+                .flatMap(naceRepository::insertMany)
+                .log();
     }
 
     public Mono<Nace> getNaceDetailsByOrder(int order) {
@@ -78,14 +80,14 @@ public class NaceService {
         return new NaceEntity(
                 nace.order(),
                 nace.level(),
-                nace.code(),
-                nace.parent(),
-                nace.description(),
-                nace.thisItemIncludes(),
-                nace.thisItemAlsoIncludes(),
-                nace.rulings(),
-                nace.thisItemExcludes(),
-                nace.referenceToISIC()
+                nace.code().replaceAll("'", "''"),
+                nace.parent().replaceAll("'", "''"),
+                nace.description().replaceAll("'", "''"),
+                nace.thisItemIncludes().replaceAll("'", "''"),
+                nace.thisItemAlsoIncludes().replaceAll("'", "''"),
+                nace.rulings().replaceAll("'", "''"),
+                nace.thisItemExcludes().replaceAll("'", "''"),
+                nace.referenceToISIC().replaceAll("'", "''")
         );
     }
 }
