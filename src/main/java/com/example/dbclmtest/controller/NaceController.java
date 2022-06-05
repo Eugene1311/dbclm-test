@@ -2,6 +2,7 @@ package com.example.dbclmtest.controller;
 
 import com.example.dbclmtest.dto.Nace;
 import com.example.dbclmtest.service.NaceService;
+import io.r2dbc.spi.R2dbcDataIntegrityViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.codec.multipart.FilePart;
@@ -18,7 +19,13 @@ public class NaceController {
 
     @PostMapping(value = "/upload")
     public Mono<Integer> saveNaceDetails(@RequestPart("file") FilePart file) {
-        return naceService.saveNaceDetails(file);
+        return naceService.saveNaceDetails(file)
+                .onErrorMap(err -> {
+                    if (err instanceof R2dbcDataIntegrityViolationException) {
+                        return new ResponseStatusException(HttpStatus.BAD_REQUEST, err.getMessage());
+                    }
+                    return err;
+                });
     }
 
     @GetMapping(value = "/{order}")
