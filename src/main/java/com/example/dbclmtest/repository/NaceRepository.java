@@ -1,7 +1,7 @@
 package com.example.dbclmtest.repository;
 
 import com.example.dbclmtest.entity.NaceEntity;
-import io.r2dbc.spi.Connection;
+import io.r2dbc.spi.Batch;
 import io.r2dbc.spi.ConnectionFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
@@ -25,8 +25,8 @@ public class NaceRepository {
 
     public Mono<Integer> insertMany(List<NaceEntity> naces) {
         return Mono.from(connectionFactory.create())
-                .map(Connection::createBatch)
-                .flatMap(batch -> {
+                .flatMapMany(connection -> {
+                    Batch batch = connection.createBatch();
                     naces.forEach(nace ->
                         batch.add("INSERT INTO nace(" +
                                 "id," +
@@ -53,9 +53,12 @@ public class NaceRepository {
                             ")"
                         )
                     );
-                    return Mono.fromDirect(batch.execute());
+                    return Flux.from(batch.execute())
+                            .doFinally(st -> connection.close());
                 })
-                .flatMap(result -> Mono.fromDirect(result.getRowsUpdated()))
+                .flatMap(result -> Mono.from(result.getRowsUpdated()))
+                .collectList()
+                .map(List::size)
                 .log();
     }
     public Mono<NaceEntity> findNaceDetailsById(int id) {
