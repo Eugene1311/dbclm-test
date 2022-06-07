@@ -25,7 +25,7 @@ public class NaceController {
 
     @Operation(summary = "Upload file with NACE details")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "NACE details are stored",
+            @ApiResponse(responseCode = "200", description = "NACE details are stored, returns number of updated rows",
                     content = { @Content(mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", content = @Content) }
     )
