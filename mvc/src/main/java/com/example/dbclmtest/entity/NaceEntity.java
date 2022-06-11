@@ -1,26 +1,30 @@
 package com.example.dbclmtest.entity;
 
 import lombok.Data;
-//import org.hibernate.annotations.Table;
-import org.springframework.data.annotation.Id;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
-@Table(schema = "nace")
+@NoArgsConstructor
+@Entity(name = "nace")
+@Table(name = "nace")
 public final class NaceEntity {
     @Id
     @Column(name = "id")
-    private final int order;
+    private int order;
     @Column(name = "level_value")
-    private final int level;
-    private final String code;
-    private final String parent;
-    private final String description;
-    private final String thisItemIncludes;
-    private final String thisItemAlsoIncludes;
-    private final String rulings;
-    private final String thisItemExcludes;
-    private final String referenceToISIC;
+    private int level;
+    private String code;
+    private String parent;
+    private String description;
+    private String thisItemIncludes;
+    private String thisItemAlsoIncludes;
+    private String rulings;
+    private String thisItemExcludes;
+    @Column(name = "reference_to_isic")
+    private String referenceToISIC;
 }
