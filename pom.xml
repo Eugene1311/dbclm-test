@@ -24,50 +24,58 @@
     </modules>
 
     <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.fasterxml.jackson.dataformat</groupId>
-                <artifactId>jackson-dataformat-csv</artifactId>
-                <version>2.13.3</version>
-            </dependency>
-            <dependency>
-                <groupId>io.r2dbc</groupId>
-                <artifactId>r2dbc-postgresql</artifactId>
-                <version>0.8.12.RELEASE</version>
-            </dependency>
+<!--        <dependencies>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-data</artifactId>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-mvc</artifactId>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.fasterxml.jackson.dataformat</groupId>-->
+<!--                <artifactId>jackson-dataformat-csv</artifactId>-->
+<!--                <version>2.13.3</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>io.r2dbc</groupId>-->
+<!--                <artifactId>r2dbc-postgresql</artifactId>-->
+<!--                <version>0.8.12.RELEASE</version>-->
+<!--            </dependency>-->
 
-            <!-- Swagger -->
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-webflux-ui</artifactId>
-                <version>1.6.4</version>
-            </dependency>
-            <!-- Testcontainers -->
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>testcontainers</artifactId>
-                <version>1.17.1</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Tests -->
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>1.17.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>1.17.1</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>r2dbc</artifactId>
-                <version>1.17.1</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
+<!--            &lt;!&ndash; Swagger &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.springdoc</groupId>-->
+<!--                <artifactId>springdoc-openapi-webflux-ui</artifactId>-->
+<!--                <version>1.6.4</version>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash; Testcontainers &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.testcontainers</groupId>-->
+<!--                <artifactId>testcontainers</artifactId>-->
+<!--                <version>1.17.1</version>-->
+<!--                <scope>test</scope>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash; Tests &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.testcontainers</groupId>-->
+<!--                <artifactId>junit-jupiter</artifactId>-->
+<!--                <version>1.17.1</version>-->
+<!--                <scope>test</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.testcontainers</groupId>-->
+<!--                <artifactId>postgresql</artifactId>-->
+<!--                <version>1.17.1</version>-->
+<!--                <scope>test</scope>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.testcontainers</groupId>-->
+<!--                <artifactId>r2dbc</artifactId>-->
+<!--                <version>1.17.1</version>-->
+<!--                <scope>test</scope>-->
+<!--            </dependency>-->
+<!--        </dependencies>-->
     </dependencyManagement>
 </project>
